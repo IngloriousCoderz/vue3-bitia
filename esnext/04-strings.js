@@ -2,6 +2,7 @@ const name = "Antony";
 
 const singleQuotes = 'Hello "world", how are you?';
 const doubleQuotes = "Hello 'world', how are you?";
+
 // template literal:
 // 1. multiline
 // 2. can use single and double quotes
