@@ -9,12 +9,7 @@ const tasks = ref([
   { id: 3, title: 'Forget everything' },
 ])
 
-// function handleChange(event) {
-//   text.value = event.target.value
-// }
-
 function handleSubmit() {
-  // event.preventDefault()
   const maxId = tasks.value.length ? tasks.value[tasks.value.length - 1].id : 0
   const task = { id: maxId + 1, title: text.value }
   tasks.value.push(task)
@@ -25,16 +20,10 @@ function handleSubmit() {
 function handleToggle(index) {
   const task = tasks.value[index]
   task.completed = !task.completed
-  // tasks.value = [...tasks.value.slice(0, index), task, ...tasks.value.slice(index + 1)]
-  // tasks.value = tasks.value.map((task) =>
-  //   task.id === id ? { ...task, completed: !task.completed } : task,
-  // )
 }
 
 function handleRemove(index) {
   tasks.value.splice(index, 1)
-  // tasks.value = [...tasks.value.slice(0, index), ...tasks.value.slice(index + 1)]
-  // tasks.value = tasks.value.filter((task) => task.id !== id)
 }
 </script>
 
@@ -44,7 +33,6 @@ function handleRemove(index) {
   <h1>Todo List</h1>
 
   <form @submit.prevent="handleSubmit">
-    <!-- <input placeholder="What next?" autofocus :value="text" @change="handleChange" /> -->
     <input placeholder="What next?" autofocus v-model="text" />
     <button>Add</button>
   </form>
