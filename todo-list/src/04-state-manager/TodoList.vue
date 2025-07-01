@@ -1,16 +1,8 @@
 <script setup>
 import { onUpdated } from 'vue'
+import { useListStore } from './stores/list'
 
-defineProps(['tasks'])
-const emit = defineEmits(['toggle', 'remove'])
-
-function handleToggle(index) {
-  emit('toggle', index)
-}
-
-function handleRemove(index) {
-  emit('remove', index)
-}
+const list = useListStore()
 
 onUpdated(() => {
   console.log('List render')
@@ -19,12 +11,12 @@ onUpdated(() => {
 
 <template>
   <ul>
-    <li v-for="(task, index) of tasks" :key="task.id">
-      <span :class="{ completed: task.completed }" @click="handleToggle(index)">{{
+    <li v-for="(task, index) of list.tasks" :key="task.id">
+      <span :class="{ completed: task.completed }" @click="list.toggle(index)">{{
         task.title
       }}</span>
       &nbsp;
-      <button @click="handleRemove(index)">x</button>
+      <button @click="list.remove(index)">x</button>
     </li>
   </ul>
 </template>

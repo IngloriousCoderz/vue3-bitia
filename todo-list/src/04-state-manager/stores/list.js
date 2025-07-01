@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const tasksStore = defineStore('tasks', () => {
+export const useListStore = defineStore('list', () => {
   const tasks = ref([
     { id: 1, title: 'Learn Vue 3', completed: true },
     { id: 2, title: 'Look for a job', completed: false },

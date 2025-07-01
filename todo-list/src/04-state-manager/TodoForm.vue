@@ -1,13 +1,15 @@
 <script setup>
-import { ref, onUpdated } from 'vue'
+import { onUpdated } from 'vue'
 
-const emit = defineEmits(['submit'])
+import { useListStore } from './stores/list'
+import { useFormStore } from './stores/form'
 
-const text = ref('')
+const form = useFormStore()
+const list = useListStore()
 
 function handleSubmit() {
-  emit('submit', text.value)
-  text.value = ''
+  list.add(form.text)
+  form.text = ''
 }
 
 onUpdated(() => {
@@ -17,7 +19,7 @@ onUpdated(() => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <input placeholder="What next?" autofocus v-model="text" />
+    <input placeholder="What next?" autofocus v-model="form.text" />
     <button>Add</button>
   </form>
 </template>
