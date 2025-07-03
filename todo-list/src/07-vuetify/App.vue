@@ -12,12 +12,12 @@ onUpdated(() => {
 
 <template>
   <v-app>
-    <div class="pa-4">
+    <v-container>
       <todo-header :name="`Matteo${' '}Antony`" />
 
       <todo-form />
 
       <todo-list />
-    </div>
+    </v-container>
   </v-app>
 </template>
