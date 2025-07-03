@@ -1,25 +1,32 @@
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { defineStore } from 'pinia'
+import * as api from '../services/api'
 
 export const useListStore = defineStore('list', () => {
-  const tasks = ref([
-    { id: 1, title: 'Learn Vue 3', completed: true },
-    { id: 2, title: 'Look for a job', completed: false },
-    { id: 3, title: 'Forget everything' },
-  ])
+  const tasks = ref([])
 
-  function add(text) {
-    const maxId = tasks.value.length ? tasks.value[tasks.value.length - 1].id : 0
-    const task = { id: maxId + 1, title: text }
-    tasks.value.push(task)
+  onMounted(fetchTasks)
+
+  async function fetchTasks() {
+    const data = await api.fetchTasks()
+    tasks.value = data
   }
 
-  function toggle(index) {
-    const task = tasks.value[index]
-    task.completed = !task.completed
+  async function add(text) {
+    const createdTask = await api.createTask(text)
+    tasks.value.push(createdTask)
+    // fetchTasks()
   }
 
-  function remove(index) {
+  async function toggle(index) {
+    const { id, completed } = tasks.value[index]
+    const updatedTask = await api.updateTask(id, { completed: !completed })
+    tasks.value[index] = updatedTask
+  }
+
+  async function remove(index) {
+    const { id } = tasks.value[index]
+    await api.removeTask(id)
     tasks.value.splice(index, 1)
   }
 

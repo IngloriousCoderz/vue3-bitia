@@ -12,7 +12,7 @@ const { text } = storeToRefs(form)
 
 function handleSubmit() {
   list.add(text.value)
-  text.value = ''
+  form.empty()
 }
 
 onUpdated(() => {

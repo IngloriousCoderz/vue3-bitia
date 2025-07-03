@@ -4,5 +4,9 @@ import { defineStore } from 'pinia'
 export const useFormStore = defineStore('form', () => {
   const text = ref('')
 
-  return { text }
+  function empty() {
+    text.value = ''
+  }
+
+  return { text, empty }
 })
