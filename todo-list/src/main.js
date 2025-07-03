@@ -3,12 +3,14 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from './06-optimistic-updates/App.vue'
+import vuetify from './vuetify'
+import App from './07-vuetify/App.vue'
 // import router from './router'
 
 const app = createApp(App)
 
 app.use(createPinia())
 // app.use(router)
+app.use(vuetify)
 
 app.mount('#app')
